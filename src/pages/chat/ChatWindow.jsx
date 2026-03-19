@@ -47,6 +47,8 @@ const ChatWindow = ({myStringId, partner, onLeaveRoom}) => {
     }, [myId, partnerId])
 
     const send = () => {
+
+        
         if(!userInput.trim()) return;
         const payload = {
             fromId: myId,
@@ -90,7 +92,9 @@ const ChatWindow = ({myStringId, partner, onLeaveRoom}) => {
                     value={userInput}
                     onChange={(e) => setUserInput(e.target.value)}
                     onKeyDown={(e) => {
+                        if (e.nativeEvent.isComposing) return;
                         if(e.key === 'Enter'){
+                            e.preventDefault();
                             send()
                         }
                     }}

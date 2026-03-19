@@ -60,7 +60,7 @@ const ChatRoomList = ({selectedRoomId, onSelectRoom, onDeleteRoom}) => {
         return () => socket.off("privateMessage", updateChatList)
     }, [myEmail, myId])
     
-    console.log(chatRooms)
+    // console.log(chatRooms)
     // 3. 새로운 채팅 시작(검색)
     const startNewChat = async () => {
         if (!inputEmail.trim()){ return; }
