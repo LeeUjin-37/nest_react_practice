@@ -8,11 +8,10 @@ import AuthLayout from "../pages/layout/AuthLayout";
 import InitializeAuthLayout from "../pages/layout/InitializeAuthLayout";
 import ChatLayout from "../pages/chat/ChatLayout";
 import ChatBot01 from "../pages/chatbot/ChatBot01";
+import ChatBot02 from "../pages/chatbot/ChatBot02";
+import ChatBot03 from "../pages/chatbot/ChatBot03";
 
 const router = createBrowserRouter([
-    {
-        element: <InitializeAuthLayout />,
-        children: [
             {
                 path: "/",
                 element: <Main />
@@ -38,6 +37,14 @@ const router = createBrowserRouter([
                 element: <ChatBot01 />
             },
             {
+                path: "/chatbot-02",
+                element: <ChatBot02 />
+            },
+            {
+                path: "/chatbot-03",
+                element: <ChatBot03 />
+            },
+            {
                 element: <AuthLayout />, // 로그인이 필요한 페이지
                 children: [
                     {
@@ -47,8 +54,8 @@ const router = createBrowserRouter([
                 ]
             }
 
-        ]
-    }
+        
+    
 ])
 
 

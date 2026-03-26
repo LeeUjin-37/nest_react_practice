@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 
-const ChatBot01 = () => {
+const ChatBot03 = () => {
     const [result, setResult] = useState("")
     const [question, setQuestion] = useState("")
 
     const handleQuestionOnChange = (e) => setQuestion(e.target.value)
     const asking = async () => {
-        // 백엔드 NEST
-        const response = await fetch("http://localhost:10000/openai/question", {
+        const response = await fetch("http://localhost:10000/openai/role-question", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -16,12 +15,26 @@ const ChatBot01 = () => {
                 question: question
             })
         })
-        const datas = await response.json()
-        setResult(datas.data)
+
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+
+        let text = "";
+
+        while(true){
+            const {done, value} = await reader.read();
+            if(done) break;
+
+            const chunk = decoder.decode(value)
+            text += chunk;
+            setResult(text)
+        }
+
     }
+
     return (
         <div>
-            쳇봇01😎!
+            쳇봇 스트리밍 옵션😎!
             <div>
                 <p>{result}</p>
             </div>
@@ -37,4 +50,4 @@ const ChatBot01 = () => {
     );
 };
 
-export default ChatBot01;
+export default ChatBot03;
